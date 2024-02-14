@@ -8,8 +8,6 @@ namespace DlegentsHomework
         {
             ObservableLimitedList A_list = new ObservableLimitedList();
 
-            //Predicate<string> predicate = A_list.ContainsS;
-
             ObservableLimitedList observableList = new ObservableLimitedList();
 
             observableList.ListChanged += A_list.ListChangedHandler;
