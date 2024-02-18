@@ -8,48 +8,44 @@ namespace DlegentsHomework
 {
     class ObservableLimitedList
     {
-        List<string> list = new List<string>() { };
-        public event Action<string> ListChanged;
-        private Predicate<string> _Predicate;
+        private Predicate<string> _predicate;
+        private List<string> _list;
+
+        public event Action<List<string>> ListChanged;
 
         public bool ContainsS(string userName)
         {
             return userName.Contains("s");
         }
 
-        public void Observable_Limited_List(Predicate<string> predicate)
+        public ObservableLimitedList(Predicate<string> predicate)
         {
-            _Predicate = predicate;
+            _predicate = predicate;
+            _list = new List<string>();
         }
 
-        public bool TryAdd(string userName)
+        public bool TryAdd(string item)
         {
-            if (ContainsS(userName))
+            if (_predicate(item))
             {
-                list.Add(userName);
-                OnListChanged(userName);
+                _list.Add(item);
+                OnListChanged();
                 return true;
             }
-
             return false;
-        }
-
-        private void OnListChanged(string message)
-        {
-            ListChanged?.Invoke(message);
-        }
-
-        public void ListChangedHandler(string userName)
-        {
-            Console.WriteLine($"List changed. Item added: {userName}");
         }
 
         public void PrintAll()
         {
-            foreach (var iteams in list)
+            foreach (var item in _list)
             {
-                Console.WriteLine(iteams);
+                Console.WriteLine(item);
             }
+        }
+
+        private void OnListChanged()
+        {
+            ListChanged?.Invoke(_list);
         }
     }
 }

@@ -6,33 +6,31 @@ namespace DlegentsHomework
     {
         static void Main(string[] args)
         {
-            ObservableLimitedList A_list = new ObservableLimitedList();
+            Predicate<string> predicate = x => x.Contains("s");
+            ObservableLimitedList observableList = new ObservableLimitedList(predicate);
 
-            ObservableLimitedList observableList = new ObservableLimitedList();
+            observableList.ListChanged += items => Console.WriteLine("List changed. Items: " + string.Join(", ", items));
 
-            observableList.ListChanged += A_list.ListChangedHandler;
-
-            int sItemsCount = 0;
-            for (int i = 0; i <= 10; i++)
+            int sCount = 0;
+            for (int i = 0; i < 10; i++)
             {
-                string newItem = "Item" + i;
-                if (A_list.ContainsS(newItem))
+                string newItem = "Items" + i;
+                if (newItem.Contains("s") && sCount < 4)
                 {
-                    sItemsCount++;
-                    A_list.TryAdd(newItem);
+                    sCount++;
                 }
 
-                if (sItemsCount == 3)
+                if(sCount > 3)
                 {
-                    Console.WriteLine("All items added:");
-                    A_list.PrintAll();
+                    newItem = "Item" + i;
                 }
-                
-                else
-                {
-                    Console.WriteLine("The words don't meet the requirements");
-                }
+
+                observableList.TryAdd(newItem);
             }
+
+            Console.WriteLine("Total items containing 's': " + sCount);
+            Console.WriteLine("All items:");
+            observableList.PrintAll();
         }
     }
 }
