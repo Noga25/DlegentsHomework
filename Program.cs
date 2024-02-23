@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿//----c# II (Dor Ben Dor) ----
+//       Noga Levkovitz
+//---------------------------
 
 namespace DlegentsHomework
 {
