@@ -11,11 +11,6 @@ namespace DlegentsHomework
 
         public event Action<List<string>> ListChanged;
 
-        public bool ContainsS(string userName)
-        {
-            return userName.Contains("s");
-        }
-
         public ObservableLimitedList(Predicate<string> predicate)
         {
             _predicate = predicate;
