@@ -23,12 +23,12 @@ namespace DlegentsHomework
                 string newItem;
                 if (sCount < 3 && i < 3)
                 {
-                    newItem = "Item" + i + "s";
+                    newItem = observableList._list[i];
                     sCount++;
                 }
                 else
                 {
-                    newItem = "Item" + i;
+                    newItem = observableList._list[i];
                 }
 
                 observableList.TryAdd(newItem);
